@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>یادواره زنده یاد مقصود داودی</title>
+    <style>
+        :root {
+            --bg-main: #0c0c0e;
+            --bg-card: #16161a;
+            --bg-card-hover: #1e1e24;
+            --accent-gold: #d4af37;
+            --accent-gold-bright: #f3e5ab;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1aa;
+            --border-color: #27272a;
+            --danger-red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Tahoma, 'Vazirmatn', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.8;
+            padding-bottom: 90px;
+            overflow-x: hidden;
+        }
+
+        /* Splash Screen Cover */
+        #splashScreen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #08080a;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .splash-card {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-gold);
+            border-radius: 24px;
+            padding: 40px 25px;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .splash-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-gold);
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+        }
+
+        .splash-title {
+            color: var(--accent-gold);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .splash-poem {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.98rem;
+            margin-bottom: 25px;
+        }
+
+        .splash-enter-btn {
+            background: linear-gradient(135deg, #d4af37, #aa820a);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+
+        .splash-enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .splash-vpn-hint {
+            margin-top: 18px;
+            font-size: 0.8rem;
+            color: #71717a;
+            line-height: 1.5;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(22, 22, 26, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.4rem;
+        }
+
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%; right: 0; left: 0;
+            background: var(--bg-card);
+            flex-direction: column;
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .nav-links.active { display: flex; }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+        }
+
+        /* Header / Banner */
+        header {
+            text-align: center;
+            padding: 45px 20px 30px;
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(12, 12, 14, 0) 100%);
+        }
+
+        .profile-img-wrap {
+            position: relative;
+            width: 165px;
+            height: 165px;
+            margin: 0 auto 20px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img-wrap:hover {
+            transform: scale(1.03);
+        }
+
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3.5 solid var(--accent-gold);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
+        }
+
+        .ribbon {
+            position: absolute;
+            bottom: 5px; right: 5px;
+            background: #000;
+            color: #fff;
+            font-size: 1.1rem;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--accent-gold);
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            font-size: 1.85rem;
+            margin-bottom: 6px;
+        }
+
+        .poem-title {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+        }
+
+        .dates-badge {
+            display: inline-flex;
+            gap: 15px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            color: #ccc;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .actions-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0 10px;
+            flex-wrap: wrap;
+            padding: 0 15px;
+        }
+
+        .action-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .action-btn.instagram {
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            color: #fff;
+            border: none;
+        }
+
+        /* Container & Sections */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .section-title {
+            color: var(--accent-gold);
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .bio-text {
+            color: #d1d1d6;
+            text-align: justify;
+            font-size: 0.98rem;
+            white-space: pre-line;
+            line-height: 2;
+        }
+
+        /* Candle Lighting Section */
+        .candle-box {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(22, 22, 26, 0.8));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 25px;
+        }
+
+        .candle-icon {
+            font-size: 2.5rem;
+            animation: flicker 1.5s infinite alternate;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px #d4af37); }
+            100% { transform: scale(1.08); filter: drop-shadow(0 0 15px #ffcc00); }
+        }
+
+        /* Media Grids */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .media-item {
+            background: #1c1c22;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            min-height: 190px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            width: 100%;
+            cursor: pointer;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+
+        .media-item:hover { border-color: var(--accent-gold); }
+
+        .media-item img, .media-item video {
+            width: 100%; height: 180px;
+            object-fit: cover;
+        }
+
+        .uploader-name {
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            color: var(--accent-gold);
+            background: #16161a;
+            width: 100%;
+            text-align: right;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .show-more-container { text-align: center; margin-top: 20px; }
+        .show-more-btn {
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .show-more-btn:hover { background: var(--accent-gold); color: #000; }
+
+        /* Forms & Buttons */
+        form { display: flex; flex-direction: column; gap: 12px; }
+        input, textarea {
+            background: #111115;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            outline: none;
+            width: 100%;
+        }
+        input:focus, textarea:focus { border-color: var(--accent-gold); }
+
+        .submit-btn {
+            background: var(--accent-gold);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.98rem;
+            width: 100%;
+            transition: opacity 0.2s;
+        }
+        .submit-btn:hover { opacity: 0.9; }
+
+        /* Comments Carousel */
+        .comments-carousel-wrapper {
+            position: relative;
+            background: #111115;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px 20px 40px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #commentsCarousel { width: 100%; position: relative; min-height: 90px; }
+
+        .carousel-comment-card {
+            opacity: 0;
+            position: absolute;
+            width: 100%; left: 0; right: 0;
+            text-align: center;
+            padding: 0 15px;
+            transition: opacity 0.6s ease;
+        }
+
+        .carousel-comment-card.active { opacity: 1; position: relative; }
+        .carousel-author { color: var(--accent-gold); font-weight: bold; font-size: 1.1rem; margin-bottom: 6px; }
+        .carousel-text { color: #f0f0f0; font-size: 0.98rem; line-height: 1.8; }
+        .carousel-hint { position: absolute; bottom: 8px; font-size: 0.78rem; color: var(--accent-gold); }
+
+        /* Modals */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 5000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .focused-comment-box, .lightbox-box, .admin-modal {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-gold);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 550px;
+            padding: 25px;
+            position: relative;
+            color: #fff;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .lightbox-box { max-width: 720px; background: #0c0c0e; text-align: center; }
+        .lightbox-box img, .lightbox-box video { width: 100%; max-height: 75vh; object-fit: contain; }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 14px; left: 14px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-item-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 14px;
+            background: #111115;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .admin-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .btn-delete-item {
+            background: var(--danger-red);
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* Persistent Background Music Bar */
+        .bg-music-bar {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(22, 22, 26, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            z-index: 2000;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+</head>
+<body>
+
+    <!-- Splash Cover Screen -->
+    <div id="splashScreen">
+        <div class="splash-card">
+            <img id="splashProfileImg" src="https://via.placeholder.com/300/16161a/d4af37?text=Maqsoud+Davoudi" alt="زنده‌یاد" class="splash-img">
+            <div class="splash-title">زنده‌یاد مقصود داودی</div>
+            <div class="splash-poem">«سعدیا مرد نکونام نمیرد هرگز»</div>
+            <button class="splash-enter-btn" onclick="enterWebsite()">ورود به یادواره</button>
+            <div class="splash-vpn-hint">برای بهبود عملکرد یادواره بهتر است از فیلتر شکن استفاده شود</div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-logo">یادواره مقصود داودی</div>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="#about" onclick="toggleMenu()">زندگی‌نامه</a>
+            <a href="#music" onclick="toggleMenu()">آثار صوتی</a>
+            <a href="#videos" onclick="toggleMenu()">ویدیوها</a>
+            <a href="#user-uploads" onclick="toggleMenu()">ارسالی‌های شما</a>
+            <a href="#condolences" onclick="toggleMenu()">دفترچه یادبود</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="profile-img-wrap" id="profileWrap">
+            <img id="mainProfileImg" src="https://via.placeholder.com/300/16161a/d4af37?text=Maqsoud+Davoudi" alt="زنده‌یاد مقصود داودی" class="profile-img">
+            <div class="ribbon">🖤</div>
+        </div>
+        <h1>زنده‌یاد مقصود داودی</h1>
+        <div class="poem-title">«سعدیا مرد نکونام نمیرد هرگز»</div>
+        <div class="dates-badge">
+            <span>آغاز قصه او: ۱ مهر ۱۳۵۸</span>
+            <span>|</span>
+            <span>آغاز قصه ما: ۳ مهر ۱۴۰۵</span>
+        </div>
+
+        <div class="actions-bar">
+            <button class="action-btn" onclick="shareWebsite()">اشتراک‌گذاری</button>
+            <a id="mapNavBtn" href="https://maps.google.com" target="_blank" class="action-btn">مسیریابی آرامگاه</a>
+            <a href="https://www.instagram.com/masouddavoodi__official" target="_blank" class="action-btn instagram">صفحه اینستاگرام</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="about">
+            <div class="section-title">به یاد زنده یاد مقصود داودی</div>
+            <div class="bio-text">
+مردی که صدایش در خاطره‌ها ماندگار است 🖤
+
+مقصود داودی، انسانی هنردوست، خوش‌ذوق و دلبستهٔ موسیقی بود. او عشق و احساسات خود را از راه هنر بیان می‌کرد؛ با نواختن ارگ و خوانندگی، با نغمه‌هایی که از دل برمیآمدند و در دل‌ها می‌نشستند.
+
+موسیقی برای مقصود تنها یک هنر نبود، بلکه بخشی از وجودش، زبان احساساتش و راهی برای به‌اشتراک گذاشتن لحظه‌های زیبا با دیگران بود. صدای او و آهنگ‌هایی که می‌نواخت، یادگاری‌هایی ارزشمند هستند که در ذهن و قلب عزیزانش برای همیشه زنده خواهند ماند.
+
+اما فراتر از هنر و موسیقی، مقصود پدری بود که عشق و مهرش در قلب فرزندش ادامه خواهد یافت. او پدر پسری به نام آریس بود؛ پسری که یادگار عشق او و ادامه‌دهندهٔ بخشی از وجود و خاطرات پدرش است. نام مقصود در قلب آریس و در یاد تمام کسانی که دوستش داشتند، جاودانه خواهد ماند.
+
+دریغ که حادثه‌ای تلخ و تصادفی ناگوار، فرصت ادامهٔ زندگی را از او گرفت و خانواده، دوستان و عزیزانش را در اندوهی عمیق فرو برد. رفتنش ناگهانی بود و جای خالی‌اش را هیچ‌کس نمی‌تواند پر کند؛ اما عشق، خاطرات و اثری که در زندگی اطرافیانش بر جای گذاشت، با گذر زمان از میان نرفته خواهد ماند.
+
+مقصود عزیز، شاید دیگر دستانت بر کلیدهای ارگ ننشیند و صدایت در میان ما طنین‌انداز نشود، اما نغمه‌های حضورت همچنان در قلب‌هایمان جاری است. تو در هر آهنگی که خاطره‌ات را زنده کند، در هر لبخندی که با یاد تو بر لب بنشیند و در قلب آریس، همچنان حضور خواهی داشت.
+
+آدم‌ها می‌روند، اما عشقشان می‌ماند؛
+صداها خاموش می‌شوند، اما نغمه‌هایشان هرگز نمی‌میرند.
+
+یادت گرامی، نامت ماندگار و روحت قرین آرامش باد.
+            </div>
+        </section>
+
+        <section id="music">
+            <div class="section-title">آثار صوتی</div>
+            <div class="audio-list" id="audioContainer"></div>
+        </section>
+
+        <section id="videos">
+            <div class="section-title">ویدیوها</div>
+            <div class="media-grid" id="videoGrid"></div>
+        </section>
+
+        <section id="user-uploads">
+            <div class="section-title">ارسالی از شما (عکس و فیلم یادگاری)</div>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 15px;">
+                اگر عکس یا ویدیویی از مراسم‌ها و خاطرات مشترک با زنده یاد مقصود داودی دارید، در این بخش آپلود کنید تا ثبت شود.
+            </p>
+
+            <form id="uploadForm" onsubmit="handleUpload(event)">
+                <input type="text" id="senderName" placeholder="نام و نام خانوادگی شما (اختیاری)">
+                <input type="file" id="mediaFile" accept="image/*,video/*" required>
+                <button type="submit" class="submit-btn" id="uploadSubmitBtn">ثبت و انتشار عکس/فیلم</button>
+            </form>
+
+            <div class="media-grid" id="uploadsContainer" style="margin-top: 20px;"></div>
+            <div class="show-more-container" id="showMoreContainer" style="display: none;">
+                <button class="show-more-btn" onclick="toggleShowAllUploads()">
+                    <span id="showMoreText">نمایش بیشتر</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="condolences">
+            <div class="section-title">دفترچه یادبود و دل‌نوشته‌ها</div>
+
+            <form id="commentForm" onsubmit="handleComment(event)" style="margin-bottom: 20px;">
+                <input type="text" id="commentName" placeholder="نام شما" required>
+                <textarea id="commentText" rows="3" placeholder="دل‌نوشته، خاطره یا پیام تسلیت خود را بنویسید..." required></textarea>
+                <button type="submit" class="submit-btn">ثبت دل‌نوشته</button>
+            </form>
+
+            <div class="comments-carousel-wrapper" onclick="openCommentModal()">
+                <div id="commentsCarousel"></div>
+                <div class="carousel-hint">🔍 برای بزرگ‌نمایی و مرور پیام‌ها کلیک کنید</div>
+            </div>
+        </section>
+
+        <!-- Candle Box -->
+        <div class="candle-box">
+            <div class="candle-icon">🕯️</div>
+            <h3 style="color: var(--accent-gold); font-size: 1.1rem; margin-bottom: 5px;">روشن کردن شمع یادبود</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 12px;">با ذکر فاتحه و صلوات، یاد و خاطره‌اش را گرامی بداریم.</p>
+            <button class="submit-btn" style="max-width: 220px; margin: 0 auto; padding: 8px 16px; font-size: 0.9rem;" onclick="lightVirtualCandle()">
+                🕯️ شمع روشن کردم (<span id="candleCount">0</span>)
+            </button>
+        </div>
+    </div>
+
+    <!-- Background Music Bar -->
+    <div class="bg-music-bar">
+        <span style="font-size: 0.85rem; color: var(--accent-gold);">موزیک پس‌زمینه:</span>
+        <audio controls loop id="bgMusicElement" style="max-width: 250px; height: 32px;">
+            <source id="bgMusicSource" src="" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="commentModal">
+        <div class="focused-comment-box">
+            <button class="modal-close-btn" onclick="closeCommentModal()">×</button>
+            <div class="carousel-author" id="modalCommentAuthor" style="font-size: 1.2rem; margin-bottom: 12px;"></div>
+            <div class="carousel-text" id="modalCommentText" style="font-size: 1.1rem; line-height: 2;"></div>
+            <div style="display: flex; justify-content: space-between; margin-top: 25px; gap: 15px;">
+                <button class="submit-btn" onclick="prevComment()">پیام قبلی</button>
+                <button class="submit-btn" onclick="nextComment()">پیام بعدی</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="lightboxModal" onclick="closeLightbox()">
+        <div class="lightbox-box" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeLightbox()">×</button>
+            <div id="lightboxContent"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="adminModal">
+        <div class="admin-modal">
+            <button class="modal-close-btn" onclick="closeAdminModal()">×</button>
+            <div id="adminLogin">
+                <h3 style="color: var(--accent-gold); margin-bottom: 15px; text-align: center;">پنل مدیریت وب‌سایت</h3>
+                <input type="password" id="adminPassInput" placeholder="رمز عبور مدیر (1234)..." style="width: 100%; margin-bottom: 15px;">
+                <button class="submit-btn" onclick="verifyAdminPass()">ورود به مدیریت</button>
+            </div>
+            <div id="adminDashboard" style="display: none;">
+                <h3 style="color: var(--accent-gold); margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">پنل مدیریت محتوا</h3>
+                
+                <!-- Fixed QR Code Section -->
+                <h4 style="color: #fff; font-size: 0.95rem; margin: 15px 0 8px;">🖨️ کیو آر کد دائمی سنگ قبر:</h4>
+                <div class="admin-item-group" style="text-align: center;">
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px;">این QR Code دائماً به آدرس اصلی سایت وصل است:</p>
+                    <input type="text" id="qrUrlInput" value="https://manihashempour17-oss.github.io/maqsoud-memorial/" readonly style="background: #18181c; text-align: center; font-size: 0.85rem; margin-bottom: 10px;">
+                    <button class="submit-btn" style="padding: 8px 12px; font-size: 0.85rem; margin: 0 auto 10px;" onclick="generateQRCode()">تولید و نمایش QR Code</button>
+                    <div id="qrcodeCanvasContainer" style="margin: 10px auto; background: #fff; padding: 10px; border-radius: 8px; display: inline-block;"></div>
+                    <br>
+                    <a id="downloadQrBtn" style="display: none; color: var(--accent-gold); font-size: 0.88rem; text-decoration: underline; cursor: pointer; font-weight: bold;" onclick="downloadQRCode()">دانلود فایل تصویر QR Code با کیفیت بالا</a>
+                </div>
+
+                <h4 style="color: #fff; font-size: 0.95rem; margin: 15px 0 8px;">مسیریابی آرامگاه (لینک یا مختصات مپ):</h4>
+                <div class="admin-item-group">
+                    <input type="text" id="adminMapInput" placeholder="لینک یا مختصات گوگل مپ...">
+                    <button class="submit-btn" style="padding: 8px; font-size: 0.85rem;" onclick="saveMapSettings()">ثبت لینک مسیریابی</button>
+                </div>
+
+                <h4 style="color: #fff; font-size: 0.95rem; margin: 15px 0 8px;">مدیریت تصویر مرحوم (آپلود مستقیم):</h4>
+                <div class="admin-item-group">
+                    <input type="file" id="adminProfileFile" accept="image/*">
+                    <button class="submit-btn" id="profileUploadBtn" style="padding: 8px; font-size: 0.85rem;" onclick="saveProfileImageUpload()">آپلود و ثبت تصویر مرحوم</button>
+                </div>
+
+                <h4 style="color: #fff; font-size: 0.95rem; margin: 15px 0 8px;">موزیک پس‌زمینه (آپلود مستقیم MP3):</h4>
+                <div class="admin-item-group">
+                    <input type="file" id="adminBgMusicFile" accept="audio/*">
+                    <button class="submit-btn" id="bgMusicUploadBtn" style="padding: 8px; font-size: 0.85rem;" onclick="saveBgMusicUpload()">آپلود و ثبت موزیک پس‌زمینه</button>
+                </div>
+
+                <h4 style="color: #fff; font-size: 0.95rem; margin: 15px 0 8px;">آثار صوتی (آپلود ویس یا آهنگ جدید):</h4>
+                <div class="admin-item-group">
+                    <input type="text" id="newAudioTitle" placeholder="عنوان اثر صوتی (مثلاً قطعه یادگاری)">
+                    <input type="file" id="newAudioFile" accept="audio/*">
+                    <button class="submit-btn" id="audioUploadBtn" style="padding: 8px; font-size: 0.85rem;" onclick="addAudioUpload()">آپلود و افزودن اثر صوتی</button>
+                </div>
+                <div id="adminAudioList"></div>
+
+                <h4 style="color: #fff; font-size: 0.95rem; margin: 15px 0 8px;">ویدیوها (آپلود مستقیم ویدیو):</h4>
+                <div class="admin-item-group">
+                    <input type="file" id="newVideoFile" accept="video/*">
+                    <button class="submit-btn" id="videoUploadBtn" style="padding: 8px; font-size: 0.85rem;" onclick="addVideoUpload()">آپلود و افزودن ویدیو</button>
+                </div>
+                <div id="adminVideosList"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>یاد و خاطره زنده یاد مقصود داودی گرامی باد 🖤</footer>
+
+    <script>
+        const TARGET_SITE_URL = 'https://manihashempour17-oss.github.io/maqsoud-memorial/';
+        const SUPABASE_URL = 'https://caoxprlvllbfosmighdc.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_HRK7_b8O064RcwwEQxjsSg_jsHSfc33';
+        let supabaseClient = null;
+        if (window.supabase) {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
+
+        let commentsData = [
+            { author: "جمع دوستان", text: "روحت شاد مقصود عزیز. صدای گرمت همیشه در گوش ماست." },
+            { author: "خانواده داودی", text: "یادت تا ابد در قلب‌های ما زنده خواهد ماند مقصود جان." },
+            { author: "آریس داودی", text: "پدر عزیزم، همیشه به یادت هستم و خاطراتت همدم من است." }
+        ];
+        let videosData = [];
+        let audiosData = [];
+        let uploadsData = [];
+        let candleCount = 0;
+        let showAllUploads = false;
+        let bgMusicUrl = "";
+        let profileImgUrl = "https://via.placeholder.com/300/16161a/d4af37?text=Maqsoud+Davoudi";
+        let mapLinkUrl = "https://maps.google.com";
+        let currentCommentIndex = 0;
+
+        async function fetchCloudData() {
+            if (!supabaseClient) return;
+            try {
+                const { data } = await supabaseClient.from('memorial_data').select('*');
+                if (data && data.length > 0) {
+                    data.forEach(item => {
+                        if (item.key === 'videos') videosData = item.value || [];
+                        if (item.key === 'audios') audiosData = item.value || [];
+                        if (item.key === 'comments') commentsData = item.value || commentsData;
+                        if (item.key === 'profile_img') profileImgUrl = item.value || profileImgUrl;
+                        if (item.key === 'bg_music') bgMusicUrl = item.value || bgMusicUrl;
+                        if (item.key === 'candles') candleCount = item.value || 0;
+                        if (item.key === 'map_link') mapLinkUrl = item.value || mapLinkUrl;
+                    });
+                }
+                const { data: uploadRows } = await supabaseClient.from('user_uploads').select('*').order('created_at', { ascending: false });
+                if (uploadRows) uploadsData = uploadRows;
+
+                renderMainVideos();
+                renderMainAudios();
+                renderCarousel();
+                renderUploads();
+                updateCandleDisplay();
+                applyProfileImage();
+                applyMapLink();
+                loadBgMusic();
+            } catch (err) {
+                console.log('Sync Error:', err);
+            }
+        }
+
+        async function pushCloudData(key, value) {
+            if (!supabaseClient) return;
+            try {
+                await supabaseClient.from('memorial_data').upsert({ key: key, value: value });
+            } catch (err) {
+                console.log('Push Error:', err);
+            }
+        }
+
+        // 3-Click Admin Trigger on Profile Picture
+        let clickCount = 0;
+        let clickTimer = null;
+        const profileWrap = document.getElementById('profileWrap');
+        if (profileWrap) {
+            profileWrap.addEventListener('click', function() {
+                clickCount++;
+                if (clickCount === 1) {
+                    clickTimer = setTimeout(() => { clickCount = 0; }, 1200);
+                } else if (clickCount >= 3) {
+                    clearTimeout(clickTimer);
+                    clickCount = 0;
+                    openAdminModal();
+                }
+            });
+        }
+
+        function enterWebsite() {
+            document.getElementById('splashScreen').style.display = 'none';
+        }
+
+        async function lightVirtualCandle() {
+            candleCount++;
+            updateCandleDisplay();
+            await pushCloudData('candles', candleCount);
+            alert('🕯️ شمع یادبود روشن شد.');
+        }
+
+        function updateCandleDisplay() {
+            const el = document.getElementById('candleCount');
+            if (el) el.innerText = candleCount;
+        }
+
+        function applyProfileImage() {
+            const img = document.getElementById('mainProfileImg');
+            const splashImg = document.getElementById('splashProfileImg');
+            if (profileImgUrl) {
+                if (img) img.src = profileImgUrl;
+                if (splashImg) splashImg.src = profileImgUrl;
+            }
+        }
+
+        // Direct Upload to Supabase Storage with Progress Feedback
+        async function uploadFileDirectToSupabase(file, btnElement, defaultText, callback) {
+            if (!supabaseClient) {
+                alert('دیتابیس ابری متصل نیست.');
+                return;
+            }
+            btnElement.disabled = true;
+            btnElement.innerText = `در حال آپلود مستقیم... 0%`;
+
+            try {
+                const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+                
+                let progress = 10;
+                let progressInterval = setInterval(() => {
+                    if (progress < 90) {
+                        progress += 15;
+                        btnElement.innerText = `در حال آپلود مستقیم... ${progress}%`;
+                    }
+                }, 200);
+
+                const { data, error } = await supabaseClient.storage
+                    .from('memorial_media')
+                    .upload(fileName, file);
+
+                clearInterval(progressInterval);
+                if (error) throw error;
+
+                const { data: urlData } = supabaseClient.storage
+                    .from('memorial_media')
+                    .getPublicUrl(fileName);
+
+                btnElement.innerText = `✔ با موفقیت آپلود شد!`;
+                setTimeout(() => {
+                    btnElement.disabled = false;
+                    btnElement.innerText = defaultText;
+                    if (callback) callback(urlData.publicUrl);
+                }, 600);
+
+            } catch (err) {
+                console.error(err);
+                alert('خطا در آپلود مستقیم فایل به سرور ابری.');
+                btnElement.disabled = false;
+                btnElement.innerText = defaultText;
+            }
+        }
+
+        function saveProfileImageUpload() {
+            const fileInput = document.getElementById('adminProfileFile');
+            const file = fileInput.files[0];
+            const btn = document.getElementById('profileUploadBtn');
+            if (!file) {
+                alert('لطفاً فایلی را انتخاب کنید.');
+                return;
+            }
+            uploadFileDirectToSupabase(file, btn, 'آپلود و ثبت تصویر مرحوم', async (publicUrl) => {
+                profileImgUrl = publicUrl;
+                await pushCloudData('profile_img', profileImgUrl);
+                applyProfileImage();
+                fileInput.value = '';
+                alert('تصویر مرحوم با موفقیت ثبت شد.');
+            });
+        }
+
+        async function saveMapSettings() {
+            const val = document.getElementById('adminMapInput').value;
+            if (val) {
+                mapLinkUrl = val.startsWith('http') ? val : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(val)}`;
+                await pushCloudData('map_link', mapLinkUrl);
+                applyMapLink();
+                alert('لینک/مختصات مسیریابی ثبت شد.');
+            }
+        }
+
+        function applyMapLink() {
+            const btn = document.getElementById('mapNavBtn');
+            if (btn) btn.href = mapLinkUrl;
+        }
+
+        function loadBgMusic() {
+            if (bgMusicUrl) {
+                const bgSource = document.getElementById('bgMusicSource');
+                if (bgSource) {
+                    bgSource.src = bgMusicUrl;
+                    document.getElementById('bgMusicElement').load();
+                }
+            }
+        }
+
+        function saveBgMusicUpload() {
+            const fileInput = document.getElementById('adminBgMusicFile');
+            const file = fileInput.files[0];
+            const btn = document.getElementById('bgMusicUploadBtn');
+            if (!file) {
+                alert('لطفاً فایل صوتی را انتخاب کنید.');
+                return;
+            }
+            uploadFileDirectToSupabase(file, btn, 'آپلود و ثبت موزیک پس‌زمینه', async (publicUrl) => {
+                bgMusicUrl = publicUrl;
+                await pushCloudData('bg_music', bgMusicUrl);
+                loadBgMusic();
+                fileInput.value = '';
+                alert('موزیک پس‌زمینه با موفقیت ثبت شد.');
+            });
+        }
+
+        function renderMainVideos() {
+            const videoGrid = document.getElementById('videoGrid');
+            if (!videoGrid) return;
+            videoGrid.innerHTML = '';
+            if (videosData.length === 0) {
+                videoGrid.innerHTML = '<div style="color: var(--text-secondary); text-align: center; grid-column: 1/-1; padding: 20px;">هنوز ویدیویی بارگذاری نشده است.</div>';
+                return;
+            }
+            videosData.forEach((url, idx) => {
+                const item = document.createElement('div');
+                item.className = 'media-item';
+                item.innerHTML = `<video src="${url}" controls style="width:100%; height:100%; object-fit:contain;"></video>`;
+                videoGrid.appendChild(item);
+            });
+        }
+
+        function renderMainAudios() {
+            const audioContainer = document.getElementById('audioContainer');
+            if (!audioContainer) return;
+            audioContainer.innerHTML = '';
+            if (audiosData.length === 0) {
+                audioContainer.innerHTML = '<div style="color: var(--text-secondary); text-align: center; padding: 15px;">هنوز اثر صوتی بارگذاری نشده است.</div>';
+                return;
+            }
+            audiosData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'admin-item-group';
+                card.innerHTML = `
+                    <div style="font-weight: bold; color: var(--accent-gold);">${item.title || `اثر صوتی ${index + 1}`}</div>
+                    <audio controls style="width: 100%; margin-top: 5px;"><source src="${item.url}" type="audio/mpeg"></audio>
+                `;
+                audioContainer.appendChild(card);
+            });
+        }
+
+        function renderCarousel() {
+            const container = document.getElementById('commentsCarousel');
+            if (!container) return;
+            container.innerHTML = '';
+            commentsData.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = `carousel-comment-card ${idx === currentCommentIndex ? 'active' : ''}`;
+                card.innerHTML = `<div class="carousel-author">${item.author}</div><div class="carousel-text">${item.text}</div>`;
+                container.appendChild(card);
+            });
+        }
+
+        setInterval(() => {
+            if (commentsData.length > 0) {
+                currentCommentIndex = (currentCommentIndex + 1) % commentsData.length;
+                renderCarousel();
+            }
+        }, 5500);
+
+        function openCommentModal() {
+            if (commentsData.length === 0) return;
+            const item = commentsData[currentCommentIndex];
+            document.getElementById('modalCommentAuthor').innerText = item.author;
+            document.getElementById('modalCommentText').innerText = item.text;
+            document.getElementById('commentModal').classList.add('active');
+        }
+
+        function closeCommentModal() { document.getElementById('commentModal').classList.remove('active'); }
+        function prevComment() { currentCommentIndex = (currentCommentIndex - 1 + commentsData.length) % commentsData.length; openCommentModal(); renderCarousel(); }
+        function nextComment() { currentCommentIndex = (currentCommentIndex + 1) % commentsData.length; openCommentModal(); renderCarousel(); }
+
+        function renderUploads() {
+            const container = document.getElementById('uploadsContainer');
+            const showMoreContainer = document.getElementById('showMoreContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            if (uploadsData.length === 0) { if (showMoreContainer) showMoreContainer.style.display = 'none'; return; }
+            const displayItems = showAllUploads ? uploadsData : uploadsData.slice(0, 3);
+            displayItems.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'media-item';
+                let mediaElement = item.file_type && item.file_type.startsWith('video') ? `<video src="${item.file_url}" controls></video>` : `<img src="${item.file_url}">`;
+                card.innerHTML = `${mediaElement}<div class="uploader-name">ارسال کننده: ${item.sender_name || 'ناشناس'}</div>`;
+                card.onclick = (e) => {
+                    if (e.target.tagName !== 'VIDEO') openLightbox(item.file_url, item.file_type);
+                };
+                container.appendChild(card);
+            });
+            if (uploadsData.length > 3) {
+                if (showMoreContainer) showMoreContainer.style.display = 'block';
+                document.getElementById('showMoreText').innerText = showAllUploads ? 'نمایش کمتر' : `نمایش بیشتر (${uploadsData.length - 3} مورد دیگر)`;
+            } else { if (showMoreContainer) showMoreContainer.style.display = 'none'; }
+        }
+
+        function toggleShowAllUploads() { showAllUploads = !showAllUploads; renderUploads(); }
+        function openLightbox(url, type) {
+            const modal = document.getElementById('lightboxModal');
+            const content = document.getElementById('lightboxContent');
+            content.innerHTML = type && type.startsWith('video') ? `<video src="${url}" controls autoplay></video>` : `<img src="${url}">`;
+            modal.classList.add('active');
+        }
+        function closeLightbox() { document.getElementById('lightboxModal').classList.remove('active'); }
+
+        async function handleUpload(e) {
+            e.preventDefault();
+            const btn = document.getElementById('uploadSubmitBtn');
+            const fileInput = document.getElementById('mediaFile');
+            const file = fileInput.files[0];
+            const name = document.getElementById('senderName').value;
+            if (!file) return;
+
+            uploadFileDirectToSupabase(file, btn, 'ثبت و انتشار عکس/فیلم', async (publicUrl) => {
+                try {
+                    const { error } = await supabaseClient.from('user_uploads').insert({
+                        sender_name: name || 'مهمان',
+                        file_url: publicUrl,
+                        file_type: file.type
+                    });
+                    if (error) throw error;
+                    alert('فایل با موفقیت آپلود و در سایت منتشر شد!');
+                    document.getElementById('uploadForm').reset();
+                    fetchCloudData();
+                } catch (err) {
+                    console.error(err);
+                    alert('خطا در ثبت اطلاعات در دیتابیس.');
+                }
+            });
+        }
+
+        async function handleComment(e) {
+            e.preventDefault();
+            const name = document.getElementById('commentName').value;
+            const text = document.getElementById('commentText').value;
+            if (name && text) {
+                commentsData.unshift({ author: name, text: text });
+                await pushCloudData('comments', commentsData);
+                currentCommentIndex = 0;
+                renderCarousel();
+                document.getElementById('commentForm').reset();
+                alert('ثبت شد.');
+            }
+        }
+
+        function openAdminModal() { 
+            document.getElementById('adminModal').classList.add('active'); 
+            renderAdminControls(); 
+            generateQRCode();
+        }
+        function closeAdminModal() { document.getElementById('adminModal').classList.remove('active'); }
+        function verifyAdminPass() {
+            if (document.getElementById('adminPassInput').value === '1234') {
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                generateQRCode();
+            } else { alert('رمز اشتباه است.'); }
+        }
+
+        function generateQRCode() {
+            const container = document.getElementById('qrcodeCanvasContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            if (window.QRCode) {
+                const canvas = document.createElement('canvas');
+                QRCode.toCanvas(canvas, TARGET_SITE_URL, { width: 200, margin: 2 }, function (err) {
+                    if (!err) {
+                        container.appendChild(canvas);
+                        document.getElementById('downloadQrBtn').style.display = 'inline-block';
+                    }
+                });
+            }
+        }
+
+        function downloadQRCode() {
+            const canvas = document.querySelector('#qrcodeCanvasContainer canvas');
+            if (canvas) {
+                const link = document.createElement('a');
+                link.download = 'maqsoud_memorial_qr.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            }
+        }
+
+        function renderAdminControls() {
+            document.getElementById('adminMapInput').value = mapLinkUrl;
+            
+            const vList = document.getElementById('adminVideosList');
+            vList.innerHTML = '';
+            videosData.forEach((url, idx) => {
+                vList.innerHTML += `<div class="admin-item-group"><div class="admin-item-header"><span>ویدیو ${idx + 1}</span><button class="btn-delete-item" onclick="deleteVideo(${idx})">حذف</button></div><video src="${url}" controls style="width:100%; height:100px; object-fit:contain; margin-bottom:5px;"></video></div>`;
+            });
+            const aList = document.getElementById('adminAudioList');
+            aList.innerHTML = '';
+            audiosData.forEach((item, idx) => {
+                aList.innerHTML += `<div class="admin-item-group"><div class="admin-item-header"><span>${item.title || `اثر ${idx + 1}`}</span><button class="btn-delete-item" onclick="deleteAudio(${idx})">حذف</button></div><audio controls style="width:100%; margin-top:5px;"><source src="${item.url}" type="audio/mpeg"></audio></div>`;
+            });
+        }
+
+        function addVideoUpload() {
+            const fileInput = document.getElementById('newVideoFile');
+            const file = fileInput.files[0];
+            const btn = document.getElementById('videoUploadBtn');
+            if (!file) {
+                alert('لطفاً ویدیویی را انتخاب کنید.');
+                return;
+            }
+            uploadFileDirectToSupabase(file, btn, 'آپلود و افزودن ویدیو', async (publicUrl) => {
+                videosData.push(publicUrl);
+                await pushCloudData('videos', videosData);
+                renderMainVideos();
+                renderAdminControls();
+                fileInput.value = '';
+                alert('ویدیو با موفقیت آپلود شد.');
+            });
+        }
+
+        async function deleteVideo(idx) {
+            videosData.splice(idx, 1);
+            await pushCloudData('videos', videosData);
+            renderMainVideos();
+            renderAdminControls();
+        }
+
+        function addAudioUpload() {
+            const title = document.getElementById('newAudioTitle').value || 'اثر صوتی';
+            const fileInput = document.getElementById('newAudioFile');
+            const file = fileInput.files[0];
+            const btn = document.getElementById('audioUploadBtn');
+            if (!file) {
+                alert('لطفاً فایل صوتی را انتخاب کنید.');
+                return;
+            }
+            uploadFileDirectToSupabase(file, btn, 'آپلود و افزودن اثر صوتی', async (publicUrl) => {
+                audiosData.push({ title: title, url: publicUrl });
+                await pushCloudData('audios', audiosData);
+                renderMainAudios();
+                renderAdminControls();
+                document.getElementById('newAudioTitle').value = '';
+                fileInput.value = '';
+                alert('اثر صوتی با موفقیت آپلود شد.');
+            });
+        }
+
+        async function deleteAudio(idx) {
+            audiosData.splice(idx, 1);
+            await pushCloudData('audios', audiosData);
+            renderMainAudios();
+            renderAdminControls();
+        }
+
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+        function shareWebsite() {
+            if (navigator.share) { navigator.share({ title: 'یادواره مقصود داودی', url: window.location.href }); }
+            else { navigator.clipboard.writeText(window.location.href); alert('لینک کپی شد.'); }
+        }
+
+        // Initialize
+        fetchCloudData();
+    </script>
+</body>
+</html>
